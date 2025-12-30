@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Shianne Durdin Vision Support Coach</title>
+
+  <style>
+    :root{
+      /* Font size controlled by buttons (min 18px, max 48px) */
+      --base-font-px: 18px;
+
+      /* High-contrast, clean palette */
+      --bg: #0b0f14;
+      --panel: #101826;
+      --text: #ffffff;
+      --muted: #d7e3ff;
+      --accent: #79c7ff;
+      --accent-2: #b6f3c4;
+      --border: #2b3a55;
+      --focus: #ffd24a;
+    }
+
+    html{ font-size: var(--base-font-px); }
+    body{
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      text-rendering: optimizeLegibility;
+    }
+
+    a{ color: var(--accent); }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, iframe:focus-visible{
+      outline: 4px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    /* Skip link for keyboard/screen reader users */
+    .skip-link{
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      padding: 0.8rem 1rem;
+      background: #000;
+      color: #fff;
+      border: 2px solid var(--focus);
+      z-index: 9999;
+    }
+    .skip-link:focus{
+      left: 0.75rem;
+      top: 0.75rem;
+    }
+
+    header{
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #0b0f14 0%, #0c1220 100%);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1rem 1rem 2rem;
+    }
+
+    /* Top controls */
+    .topbar{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .controls{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem; align-items: center;
+    }
+
+    .controls .label{
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+      margin-right: 0.25rem;
+    }
+
+    button{
+      font: inherit;
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      border: 2px solid var(--border);
+      background: #0d1524;
+      color: var(--text);
+      cursor: pointer;
+      transition: transform 0.06s ease-in-out, border-color 0.15s ease-in-out;
+    }
+    button:hover{
+      border-color: var(--accent);
+    }
+    button:active{
+      transform: translateY(1px);
+    }
+
+    .status{
+      font-size: 0.95rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: rgba(16,24,38,0.75);
+      padding: 0.55rem 0.8rem;
+      border-radius: 12px;
+      max-width: 22rem;
+    }
+
+    /* Brand block */
+    .brand{
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 0.75rem 0 1.25rem;
+    }
+
+    .logo{
+      width: 92px; height: 92px;
+      border-radius: 18px;
+      border: 2px solid var(--border);
+      background: #0d1524;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 0.75rem;
+    }
+
+    .logo img{
+      max-width: 80px;
+      max-height: 80px;
+      display: block;
+    }
+
+    h1{
+      margin: 0.2rem 0 0.25rem;
+      font-size: 1.9rem;
+      letter-spacing: 0.01em;
+    }
+
+    .tagline{
+      margin: 0;
+      color: var(--accent-2);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    main{
+      padding: 1.25rem 0 0;
+    }
+
+    section{
+      background: rgba(16,24,38,0.6);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.1rem 1.1rem;
+      margin: 0 0 1rem;
+    }
+
+    h2{
+      margin: 0 0 0.75rem;
+      font-size: 1.45rem;
+      letter-spacing: 0.01em;
+    }
+
+    p{
+      margin: 0 0 0.75rem;
+    }
+
+    .programs ul{
+      margin: 0.5rem 0 0;
+      padding-left: 1.15rem;
+    }
+
+    .programs li{
+      margin: 0 0 1.1rem;
+    } .program-title{
+      font-weight: 800;
+      margin: 0 0 0.35rem;
+    }
+
+    .program-details{
+      margin: 0 0 0.35rem;
+      color: var(--muted);
+    }
+
+    .note{
+      padding: 0.85rem 0.9rem;
+      border-left: 6px solid var(--accent);
+      background: rgba(121,199,255,0.12);
+      border-radius: 12px;
+      color: var(--text);
+      margin-top: 0.5rem;
+    }
+
+    .hours ul{
+      margin: 0.5rem 0 0;
+      padding-left: 1.15rem;
+    }
+    .hours li{
+      margin: 0.35rem 0;
+    }
+
+    .form-frame{
+      width: 100%;
+      height: 1100px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: #fff; /* Google Form usually expects light background */
+    }
+
+    footer{
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .abn{
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    /* Improve readability on small screens */
+    @media (max-width: 520px){
+      h1{ font-size: 1.65rem; }
+      .status{ max-width: none; width: 100%; }
+      .topbar{ justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header>
+    <div class="wrap">
+      <div class="topbar" role="region" aria-label="Accessibility controls">
+        <nav class="controls" aria-label="Text size controls">
+          <span class="label" id="textSizeLabel">Text size:</span>
+          <button type="button" data-size="18" aria-describedby="textSizeLabel">18</button>
+          <button type="button" data-size="22" aria-describedby="textSizeLabel">22</button>
+          <button type="button" data-size="26" aria-describedby="textSizeLabel">26</button>
+          <button type="button" data-size="32" aria-describedby="textSizeLabel">32</button>
+          <button type="button" data-size="40" aria-describedby="textSizeLabel">40</button>
+          <button type="button" data-size="48" aria-describedby="textSizeLabel">48</button>
+          <button type="button" id="resetSize" aria-describedby="textSizeLabel">Reset</button>
+        </nav>
+
+        <!-- Announces changes to screen readers -->
+        <div class="status" role="status" aria-live="polite" aria-atomic="true" id="fontStatus">
+          Text size is set to 18 pixels.
+        </div>
+      </div>
+
+      <div class="brand" aria-label="Business identity">
+        <div class="logo" aria-hidden="false">
+          <!-- Replace "logo-eye.png" with your actual file name in your GitHub repo -->
+          <img
+            src="logo-eye.png"
+            alt="Logo: an eye icon. Below it, the words ‘Blindness Is A Different Kind of Vision’ in a clearly readable font."
+            width="80"
+            height="80"
+          />
+        </div>
+        <h1>Shianne Durdin Vision Support Coach</h1>
+        <p class="tagline">Blindness Is A Different Kind of Vision</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <section aria-labelledby="description-heading">
+      <h2 id="description-heading">Description</h2>
+      <p>
+        As a child, I was fortunate to have attended a blind school where I received support in various aspects of life with low vision such as assistive technology, braille courses and adaptive sports, however, I always lacked the comfort of having people I could talk to, who had the lived experience of a blind or low vision individual. And that is why as a support coach for the vision impaired, I not only offer personalised braille and screen reader training, tailored advice on pathways for the future, and strategies for a more independent daily life, I also offer mentorship. A space of understanding. A place where each and every one of my clients feels heard and validated. Because while blindness might mean lack of sight, it does not mean lack of vision.
+      </p>
+      <p>
+        Online platform Zoom will be used for all appointments and programs, all of which are designed to cater to blind and low vision individuals, as well as parents and allies.
+      </p>
+    </section>
+
+    <section class="programs" aria-labelledby="programs-heading">
+      <h2 id="programs-heading">Programs</h2>
+
+      <ul>
+        <li>
+          <p class="program-title">6 week introduction to navigating a computer using Jaws</p>
+          <p class="program-details">One-on-one online program. Weekly 1 hour sessions. Total cost: AUD $260 (due before the beginning of the second session).</p>
+          <p class="program-details">Topics include navigating File Explorer and Word documents, creating and saving files, connecting to internet and Bluetooth devices, configuring settings, accessing the internet via Google Chrome, Jaws-specific shortcuts, and anything the client would like to learn.</p>
+        </li>
+
+        <li>
+          <p class="program-title">6 week introduction to using iPad and iPhone with VoiceOver</p>
+          <p class="program-details">One-on-one online program. Weekly 1 hour sessions. Total cost: AUD $280 (due before the beginning of the third session).</p>
+          <p class="program-details">Topics include sending and replying to emails and messages, making calls, configuring settings, navigating websites and well-known apps, navigating documents, and anything the client would like to learn.</p>
+        </li>
+
+        <li>
+          <p class="program-title">8 week Exploring Pathways</p>
+          <p class="program-details">One-on-one online program. Weekly 1 hour sessions. Total cost: AUD $260 (due by the beginning of the third session).</p>
+          <p class="program-details">Topics include daily living skills, goal setting, peer mentoring, and emotional support. The first session explores your current, short-term, and long-term goals as an individual with blindness or low vision. Every appointment begins with a check-in on what you feel you need for the session.</p>
+        </li> <li>
+          <p class="program-title">4 week introduction to Basic Braille</p>
+          <p class="program-details">One-on-one online program. Weekly 45 minute sessions. Total cost: AUD $230 (due before the beginning of the second session).</p>
+          <p class="program-details">Topics include the braille alphabet, basic Maths symbols, and anything else the client would like to learn.</p>
+          <p class="program-details">Braille paper and a braille machine are required for this program. Additional learning resources will be sent via post.</p>
+        </li>
+
+        <li>
+          <p class="program-title">6 Week Introduction To Braille Music</p>
+          <p class="program-details">One-on-one online program. Weekly 45 minute sessions. Total cost: AUD $320 (due before the beginning of the second session).</p>
+          <p class="program-details">Topics include basic notation and rhythm, writing scales in braille, composing simple melodies, and anything the client would like to learn.</p>
+          <p class="program-details">Braille paper and a braille machine are required for this program. Additional learning resources will be sent via post.</p>
+        </li>
+
+        <li>
+          <p class="program-title">6 Week Intermediate iPad and iPhone Navigation Using VoiceOver</p>
+          <p class="program-details">One-on-one online program. Total cost: AUD $290 (due before the beginning of the second session).</p>
+          <p class="program-details">Topics include VoiceOver shortcuts, downloading attachments within emails and messages, sending emails and messages with attachments, installing and using third party apps Be My Eyes and Seeing AI, using braille screen input mode (typing on screen using braille entry), and anything the client would like to learn.</p>
+        </li>
+
+        <li>
+          <p class="program-title">6 Week Intermediate Braille Music</p>
+          <p class="program-details">One-on-one online program. Weekly 1 hour sessions. Total cost: AUD $350 (due before the beginning of the third session).</p>
+          <p class="program-details">Topics include writing chords in braille, composing piano music for left and right hands, key and time signatures, syncopated rhythms, how to set out a piano score, repeats, dynamic markings, and anything the client would like to learn.</p>
+          <p class="program-details">Braille paper and a braille machine are required for this program. Additional learning resources will be sent via post.</p>
+        </li>
+
+        <li>
+          <p class="program-title">6 Week Intermediate Braille</p>
+          <p class="program-details">One-on-one online program. Weekly 1 hour sessions. Total cost: AUD $310 (due before the beginning of the second session).</p>
+          <p class="program-details">Topics include contractions (single combinations of dots used to write whole words), punctuation markings, intermediate Maths symbols, a brief history of braille, and anything the client would like to learn.</p>
+          <p class="program-details">A braille machine and braille paper are required for this program. Additional learning resources will be sent via post.</p>
+        </li>
+      </ul>
+
+      <div class="note" role="note" aria-label="Program notes">
+        <p><strong>Flexibility:</strong> Every program can be modified to meet the needs of the client.</p>
+        <p>
+          If you have any other topics you may wish to discuss when it comes to adapting to life with low vision such as sports for the blind, orientation and mobility, services that can assist with daily independence etc. you can also book individual sessions seperate to any of these programs.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="individual-heading">
+      <h2 id="individual-heading">If You Book an Individual Session</h2>
+      <p><strong>Note:</strong> The information in this heading only applies if you are booking an individual session, seperate from the programs listed above.</p>
+      <p>Each appointment will vary from between 30 minutes to 1 hour, depending on your preference. Online communication platform Zoom will be used, and parents are more than welcome to be a part of these sessions.</p>
+      <p>Individual sessions typically cost AUD $25 for 30 minutes, AUD $40 for 45 minutes and AUD $50 for 1 hour, however costing is flexible. Invoices will be written and sent after each session.</p>
+    </section>
+
+    <section class="hours" aria-labelledby="hours-heading">
+      <h2 id="hours-heading">Availability and Hours</h2>
+      <ul>
+        <li>Monday: Available from 4 PM–8 PM</li>
+        <li>Tuesday: Unavailable.</li>
+        <li>Wednesday: Available from 4 PM–7 PM.</li>
+        <li>Thursday: Available from 4 PM–8:30 PM.</li>
+        <li>Friday: Available from 4 PM–6:30 PM.</li>
+        <li>Saturday: Available from 4 PM–8 PM.</li>
+        <li>Sunday: Available from 10 AM–5 PM.</li>
+      </ul>
+      <p>All times listed above are relevant to Australian Central Standard time.</p>
+    </section>
+
+    <section aria-labelledby="registration-heading">
+      <h2 id="registration-heading">Registration</h2>
+      <p>
+        Fill out the form below to register for a session or program. Your response will be forwarded to me via email and I will contact you within 7 business days regarding your registration!
+      </p>
+
+      <!-- No unnecessary clutter around the form. -->
+      <iframe
+        class="form-frame"
+        title="Registration form for Shianne Durdin Vision Support Coach"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSe9mwoFYklA6rcwiCISmw88I4VYha0BRCZm6GT8J6CEi1qwTA/viewform?embedded=true"
+        loading="lazy"
+      >
+        Your browser does not support embedded forms. You can still access the registration form using the provided link in your browser.
+      </iframe>
+    </section>
+
+    <section aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Get in Contact</h2>
+      <p>If you have any feedback or inquiries please don't hesitate to email</p>
+      <p><a href="mailto:shianne.blvcoach@gmail.com">shianne.blvcoach@gmail.com</a></p>
+      <p class="abn">ABN: 49573074386</p>
+    </section>
+
+    <footer aria-label="Footer and disclaimer">
+      <p>
+        <strong>Disclaimer:</strong> I do not currently hold any youth work or counselling qualifications. I am someone who seeks to share knowledge and independence strategies with the next generation of people who are blind or have low vision through personal experience. I hold a Working With Children's check and a Working With Vulnerable People's check, both valid until 2029.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const status = document.getElementById("fontStatus");
+      const buttons = Array.from(document.querySelectorAll('button[data-size]'));
+      const resetBtn = document.getElementById("resetSize");
+
+      const MIN = 18;
+      const MAX = 48;
+      const DEFAULT = 18;
+      const STORAGE_KEY = "sdvsc_font_px";
+
+      function clamp(n, min, max) {
+        return Math.max(min, Math.min(max, n));
+      }
+
+      function setFontSize(px) {
+        const size = clamp(px, MIN, MAX);
+        root.style.setProperty("--base-font-px", size + "px");
+        if (status) status.textContent = "Text size is set to " + size + " pixels.";
+        try { localStorage.setItem(STORAGE_KEY, String(size)); } catch (e) {}
+      }
+
+      // Restore saved size
+      let saved = DEFAULT;
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const parsed = raw ? parseInt(raw, 10) : DEFAULT;
+        saved = Number.isFinite(parsed) ? parsed : DEFAULT;
+      } catch (e) {}
+      setFontSize(saved);
+
+      buttons.forEach(btn => {
+        btn.addEventListener("click", function () {
+          const px = parseInt(this.getAttribute("data-size"), 10);
+          if (!Number.isNaN(px)) setFontSize(px);
+        });
+      }); resetBtn.addEventListener("click", function () {
+        setFontSize(DEFAULT);
+      });
+    })();
+  </script>
+</body>
+</html>
